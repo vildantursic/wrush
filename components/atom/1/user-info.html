@@ -1,0 +1,25 @@
+<dom-module id="w-user-info">
+
+  <template>
+    <p>
+      This is {{name}}!
+    </p>
+  </template>
+
+  <script>
+    class UserInfoComponent extends Polymer.Element {
+      static get is() { return "w-user-info"; }
+      // configure owner property
+      static get properties() {
+        return {
+          name: {
+            type: String,
+            value: 'Vildan',
+          }
+        };
+      }
+    }
+    customElements.define(UserInfoComponent.is, UserInfoComponent);
+  </script>
+
+</dom-module>

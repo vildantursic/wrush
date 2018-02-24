@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <!-- Figure out how to move polymer import where it is needed -->
+    <link rel="import"  href="https://polygit.org/components/polymer/polymer-element.html">
+
+    <!-- web component -->
+    <link rel="import" href="http://45.76.90.178:4444/wrush/atom/1/test.html" async>
+    <link rel="import" href="http://45.76.90.178:4444/wrush/atom/1/advanced.html" async>
+
+    <!-- polymer component -->
+    <link rel="import" href="http://45.76.90.178:4444/wrush/navigate/1/header.html" async>
+    <link rel="import" href="http://45.76.90.178:4444/wrush/general/1/login.html" async>
+    <link rel="import" href="http://45.76.90.178:4444/wrush/atom/1/user-info.html" async>
+
+    <style media="screen">
+      html, body {
+        margin: 0;
+        padding: 0;
+      }
+
+      .login-section {
+        width: 400px;
+      }
+
+      .content {
+        padding: 70px 50px;
+        min-height: 1000px;
+      }
+
+      .strange-repeating {
+        border: dotted 1px black;
+      }
+    </style>
+  </head>
+  <body>
+    <w-header></w-header>
+
+    <w-test></w-test>
+
+    <div class="content" id="app">
+      <div>
+        {{ message }}
+      </div>
+      <input v-model="message">
+      <button v-on:click="getLoginData">Get login data</button>
+
+      <w-user-info name="... something new"></w-user-info>
+
+      <!-- Interesting that custom element repeats -->
+      <div class="strange-repeating">
+        <w-test></w-test>
+      </div>
+
+
+      <w-advanced></w-advanced>
+
+
+      <div class="login-section">
+        <w-login></w-login>
+      </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+
+    <!-- Functionalities should be moved to separate js file -->
+    <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        message: 'Hello Vue!',
+        loginData: {}
+      },
+      mounted() {
+        document.querySelector('w-login').addEventListener('kick', (e) => {
+            console.log(e.detail.data);
+            Object.assign({}, this.loginData, e.detail.data);
+        })
+      },
+      methods: {
+        getLoginData() {
+          console.log(JSON.parse(JSON.stringify(this.loginData)));
+        }
+      }
+    })
+
+
+    </script>
+  </body>
+</html>

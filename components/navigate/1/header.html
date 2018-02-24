@@ -1,0 +1,73 @@
+<link rel="import"  href="https://polygit.org/components/polymer/lib/elements/dom-repeat.html">
+
+<dom-module id="w-header">
+
+  <template>
+    <style media="screen">
+      :host {
+        display: block;
+        --my-text-color: #03A9F4;
+      }
+
+      .fixed-navigation {
+        position: fixed;
+        width: 100%;
+        z-index: 100;
+      }
+      .navigation {
+        width: 100%;
+        height: 60px;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+      }
+      .navigation .item {
+        color: var(--my-text-color)
+      }
+
+    </style>
+
+    <div class="navigation">
+      <template is="dom-repeat" items="{{items.list}}">
+          <a class="item" href="{{item.link}}">{{item.text}}</a>
+      </template>
+    </div>
+  </template>
+
+  <script>
+    class HeaderComponent extends Polymer.Element {
+      static get is() { return "w-header"; }
+      // configure owner property
+      static get properties() {
+        return {
+          items: {
+            type: Object,
+            value: {
+              list: [
+                {
+                  link: 'http://google.com',
+                  text: 'one'
+                },
+                {
+                  link: 'http://google.com',
+                  text: 'two'
+                },
+                {
+                  link: 'http://google.com',
+                  text: 'three'
+                },
+                {
+                  link: 'http://google.com',
+                  text: 'four'
+                },
+              ]
+            },
+          }
+        };
+      }
+    }
+    customElements.define(HeaderComponent.is, HeaderComponent);
+  </script>
+
+</dom-module>

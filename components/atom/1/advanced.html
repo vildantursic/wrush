@@ -1,0 +1,22 @@
+<template id="w-advanced">
+  <style>
+    p { color: green; }
+  </style>
+  <p>I'm in Shadow DOM. My markup was stamped from a &lt;template&gt;.</p>
+</template>
+
+<script>
+  // let tmpl = document.querySelector('#w-advanced');
+  let tmpl = document.currentScript.ownerDocument.querySelector('#w-advanced');
+  
+  // If your code is inside of an HTML Import you'll need to change the above line to:
+  // let tmpl = document.currentScript.ownerDocument.querySelector('#w-advanced');
+
+  customElements.define('w-advanced', class extends HTMLElement {
+    constructor() {
+      super(); // always call super() first in the ctor.
+      let shadowRoot = this.attachShadow({mode: 'open'});
+      shadowRoot.appendChild(tmpl.content.cloneNode(true));
+    }
+  });
+</script>

@@ -1,0 +1,11 @@
+<script>
+  // just some simple custom element component
+  // NOTE it have issues with vuejs, it repeats when it is in template rendered by vue
+  var WTestComponent = Object.create(HTMLElement.prototype);
+
+  WTestComponent.createdCallback = function() {
+    this.innerHTML = "<h3>Test Component from Walter!</h3>";
+  };
+
+  var WTest = document.registerElement('w-test', {prototype: WTestComponent});
+</script>

@@ -1,0 +1,24 @@
+<template id="w-custom-element-template">
+  <style>
+    .title {
+      color: #03A9F4;
+    }
+  </style>
+  <h1 class="title">Walter</p>
+</template>
+
+<script>
+  // let tmpl = document.querySelector('#w-custom-element-template');
+  let tmpl = document.currentScript.ownerDocument.querySelector('#w-custom-element-template');
+
+  // If your code is inside of an HTML Import you'll need to change the above line to:
+  // let tmpl = document.currentScript.ownerDocument.querySelector('#w-custom-element-template');
+
+  customElements.define('w-custom-element-template', class extends HTMLElement {
+    constructor() {
+      super(); // always call super() first in the ctor.
+      let shadowRoot = this.attachShadow({mode: 'open'});
+      shadowRoot.appendChild(tmpl.content.cloneNode(true));
+    }
+  });
+</script>

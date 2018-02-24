@@ -1,0 +1,58 @@
+<dom-module id="w-login">
+
+  <template>
+    <style media="screen">
+
+      :host {
+        --my-theme-color: #03A9F4;
+
+        display: block;
+        background-color: var(--my-theme-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+      }
+    </style>
+
+    <div>
+      <h4>[[title]]</h4>
+      <input type="text" value="{{data.username::input}}">
+      <input type="password" value="{{data.password::input}}">
+      <button on-click="handleClick">Login</button>
+    </div>
+  </template>
+
+  <script>
+    class LoginComponent extends Polymer.Element {
+      static get is() { return "w-login"; }
+      // configure owner property
+      static get properties() {
+        return {
+          title: {
+            type: String,
+            value: 'Login Name'
+          },
+          data: {
+            type: Object,
+            notify: true,
+            value: {
+              username: '',
+              password: ''
+            }
+          }
+        };
+      }
+
+      ready() {
+        super.ready();
+      }
+
+      handleClick() {
+        this.dispatchEvent(new CustomEvent('kick', {detail: {data: this.data}, composed: true}));
+      }
+    }
+    customElements.define(LoginComponent.is, LoginComponent);
+  </script>
+
+</dom-module>
