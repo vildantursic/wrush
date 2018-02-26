@@ -1,0 +1,35 @@
+<dom-module id="w-damir">
+
+  <template>
+    <style media="screen">
+      :host {
+        display: block;
+        --my-text-color: #03A9F4;
+      }
+
+      .title {
+        color: var(--my-text-color);
+      }
+
+    </style>
+
+    <h1 class="title">Ja sam budala!</h1>
+  </template>
+
+  <script>
+    class PolymerTemplateComponent extends Polymer.Element {
+      static get is() { return "w-damir"; }
+      // configure owner property
+      static get properties() {
+        return {
+          title: {
+            type: String,
+            value: 'Walter'
+          }
+        };
+      }
+    }
+    customElements.define(PolymerTemplateComponent.is, PolymerTemplateComponent);
+  </script>
+
+</dom-module>
