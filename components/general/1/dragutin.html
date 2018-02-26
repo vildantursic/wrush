@@ -1,0 +1,35 @@
+<dom-module id="w-dragutin">
+
+    <template>
+        <style media="screen">
+            :host {
+                display: block;
+                --my-text-color: #ff22aa;
+            }
+
+            .title {
+                color: var(--my-text-color);
+            }
+
+        </style>
+
+        <button class="title">{{title}}</button>
+    </template>
+
+    <script>
+        class PolymerTemplateComponent extends Polymer.Element {
+            static get is() { return "w-polymer-template"; }
+            // configure owner property
+            static get properties() {
+                return {
+                    title: {
+                        type: String,
+                        value: 'Dragutin'
+                    }
+                };
+            }
+        }
+        customElements.define(PolymerTemplateComponent.is, PolymerTemplateComponent);
+    </script>
+
+</dom-module>
